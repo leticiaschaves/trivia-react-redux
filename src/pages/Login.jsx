@@ -26,11 +26,16 @@ class Login extends Component {
     }, this.validationBtn);
   };
 
-  handleClick = async () => {
+  playGame = async () => {
     const { history } = this.props;
     // const { email } = this.state;
     localStorage.setItem('token', await getToken());
     history.push('/game');
+  };
+
+  settings = () => {
+    const { history } = this.props;
+    history.push('/settings');
   };
 
   render() {
@@ -67,9 +72,16 @@ class Login extends Component {
         <button
           disabled={ isDisabled }
           data-testid="btn-play"
-          onClick={ this.handleClick }
+          onClick={ this.playGame }
         >
           Play
+        </button>
+        <button
+          data-testid="btn-settings"
+          onClick={ this.settings }
+        >
+          Configurações
+
         </button>
       </div>
     );
