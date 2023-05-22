@@ -1,5 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import validator from 'validator';
+import { getToken } from '../helpers/triviaAPI';
 
 class Login extends Component {
   state = {
@@ -21,6 +24,13 @@ class Login extends Component {
     this.setState({
       [name]: value,
     }, this.validationBtn);
+  };
+
+  handleClick = async () => {
+    const { history } = this.props;
+    // const { email } = this.state;
+    localStorage.setItem('token', await getToken());
+    history.push('/game');
   };
 
   render() {
@@ -54,10 +64,21 @@ class Login extends Component {
             onChange={ this.onInputChange }
           />
         </label>
-        <button disabled={ isDisabled } data-testid="btn-play">Play</button>
+        <button
+          disabled={ isDisabled }
+          data-testid="btn-play"
+          onClick={ this.handleClick }
+        >
+          Play
+        </button>
       </div>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.object,
+  dispatch: PropTypes.func,
+}.isRequired;
+
+export default connect()(Login);
