@@ -29,8 +29,8 @@ class Login extends Component {
   playGame = async () => {
     const { history } = this.props;
     // const { email } = this.state;
-    localStorage.setItem('token', await getToken());
     history.push('/game');
+    localStorage.setItem('token', await getToken());
   };
 
   settings = () => {
