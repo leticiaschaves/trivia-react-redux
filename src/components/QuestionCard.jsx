@@ -2,12 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getQuestions } from '../helpers/triviaAPI';
 import './QuestionCard.css';
+import Timer from './Timer';
 
 export default class QuestionCard extends Component {
   state = {
     results: [],
     activeIndex: 0,
     userAnswered: false,
+    isDisabled: false,
   };
 
   async componentDidMount() {
@@ -39,16 +41,18 @@ export default class QuestionCard extends Component {
   };
 
   renderAnswers = () => {
-    const { results, activeIndex, userAnswered } = this.state;
+    const { results, activeIndex, userAnswered, isDisabled } = this.state;
     const activeQuestion = results[activeIndex];
     const arrayButtons = [];
 
     if (activeQuestion.type === 'boolean') {
       arrayButtons.push(
         <button
+          key="correct"
           data-testid="correct-answer"
           className={ userAnswered ? 'correct' : '' }
           onClick={ this.handleClick }
+          disabled={ isDisabled }
         >
           {activeQuestion.correct_answer}
         </button>,
@@ -56,9 +60,11 @@ export default class QuestionCard extends Component {
 
       arrayButtons.push(
         <button
+          key="incorrect"
           data-testid={ `wrong-answer-${0}` }
           className={ userAnswered ? 'incorrect' : '' }
           onClick={ this.handleClick }
+          disabled={ isDisabled }
         >
           {activeQuestion.incorrect_answers[0]}
         </button>,
@@ -68,9 +74,11 @@ export default class QuestionCard extends Component {
     }
     arrayButtons.push(
       <button
+        key="correct"
         data-testid="correct-answer"
         className={ userAnswered ? 'correct' : '' }
         onClick={ this.handleClick }
+        disabled={ isDisabled }
       >
         {activeQuestion.correct_answer}
       </button>,
@@ -79,9 +87,11 @@ export default class QuestionCard extends Component {
     activeQuestion.incorrect_answers.forEach((question, index) => {
       arrayButtons.push(
         <button
+          key={ index }
           data-testid={ `wrong-answer-${index}` }
           className={ userAnswered ? 'incorrect' : '' }
           onClick={ this.handleClick }
+          disabled={ isDisabled }
         >
           {activeQuestion.incorrect_answers[index]}
         </button>,
@@ -89,6 +99,11 @@ export default class QuestionCard extends Component {
     });
     console.log(this.sortArray(arrayButtons));
     return this.sortArray(arrayButtons);
+  };
+
+  timeOut = () => {
+    console.log('GAME OVER');
+    this.setState({ isDisabled: true });
   };
 
   render() {
@@ -102,6 +117,7 @@ export default class QuestionCard extends Component {
             <p data-testid="question-category">{activeQuestion.category}</p>
             <p data-testid="question-text">{activeQuestion.question}</p>
             <p>{activeQuestion.type}</p>
+            <Timer timeOut={ this.timeOut } />
             <div data-testid="answer-options">
               { this.renderAnswers()}
             </div>
