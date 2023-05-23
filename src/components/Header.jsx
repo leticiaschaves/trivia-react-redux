@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getGravatar } from '../helpers/getGravatar';
+import './Header.css';
 
 class Header extends Component {
   state = {
@@ -20,13 +21,17 @@ class Header extends Component {
     const { name } = this.props;
     const { urlGravatar } = this.state;
     return (
-      <header>
+      <header
+        className="header-container"
+      >
         <img
           data-testid="header-profile-picture"
           src={ urlGravatar }
           alt={ name }
+          className="header-profile-img"
         />
-        <h3 data-testid="header-player-name">{ name }</h3>
+        {/* <p>{ urlGravatar }</p> */}
+        <p data-testid="header-player-name">{ name }</p>
         <p data-testid="header-score">0</p>
       </header>
     );
