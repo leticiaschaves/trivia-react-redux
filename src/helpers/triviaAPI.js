@@ -13,3 +13,18 @@ export const getToken = async () => {
     });
   }
 };
+
+export const getQuestions = async (token) => {
+  try {
+    const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+    const data = await response.json();
+    const invalidToken = 3;
+    return data.response_code === invalidToken ? false : data;
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+    });
+  }
+};
