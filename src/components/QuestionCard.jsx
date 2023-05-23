@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getQuestions } from '../helpers/triviaAPI';
+import './QuestionCard.css';
 
 export default class QuestionCard extends Component {
   state = {
     results: [],
     activeIndex: 0,
+    userAnswered: false,
   };
 
   async componentDidMount() {
@@ -32,8 +34,12 @@ export default class QuestionCard extends Component {
     return array.sort(() => half - Math.random());
   };
 
+  handleClick = () => {
+    this.setState({ userAnswered: true });
+  };
+
   renderAnswers = () => {
-    const { results, activeIndex } = this.state;
+    const { results, activeIndex, userAnswered } = this.state;
     const activeQuestion = results[activeIndex];
     const arrayButtons = [];
 
@@ -41,13 +47,19 @@ export default class QuestionCard extends Component {
       arrayButtons.push(
         <button
           data-testid="correct-answer"
+          className={ userAnswered ? 'correct' : '' }
+          onClick={ this.handleClick }
         >
           {activeQuestion.correct_answer}
         </button>,
       );
 
       arrayButtons.push(
-        <button data-testid={ `wrong-answer-${0}` }>
+        <button
+          data-testid={ `wrong-answer-${0}` }
+          className={ userAnswered ? 'incorrect' : '' }
+          onClick={ this.handleClick }
+        >
           {activeQuestion.incorrect_answers[0]}
         </button>,
       );
@@ -55,14 +67,22 @@ export default class QuestionCard extends Component {
       return (this.sortArray(arrayButtons));
     }
     arrayButtons.push(
-      <button data-testid="correct-answer">
+      <button
+        data-testid="correct-answer"
+        className={ userAnswered ? 'correct' : '' }
+        onClick={ this.handleClick }
+      >
         {activeQuestion.correct_answer}
       </button>,
     );
 
     activeQuestion.incorrect_answers.forEach((question, index) => {
       arrayButtons.push(
-        <button data-testid={ `wrong-answer-${index}` }>
+        <button
+          data-testid={ `wrong-answer-${index}` }
+          className={ userAnswered ? 'incorrect' : '' }
+          onClick={ this.handleClick }
+        >
           {activeQuestion.incorrect_answers[index]}
         </button>,
       );
