@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import validator from 'validator';
 import { getToken } from '../helpers/triviaAPI';
+import './Login.css';
 
 class Login extends Component {
   state = {
@@ -41,49 +42,54 @@ class Login extends Component {
   render() {
     const { isDisabled } = this.state;
     return (
-      <div>
-        <label
-          htmlFor="input-player-name"
-        >
-          <input
-            type="text"
-            id="input-player-name"
-            name="name"
-            data-testid="input-player-name"
-            className="input-player-name"
-            placeholder="name"
-            onChange={ this.onInputChange }
-          />
-        </label>
+      <main className="page">
+        <div className="conteiner">
+          <h1>Sign in</h1>
+          <label
+            htmlFor="input-player-name"
+          >
+            <input
+              type="text"
+              id="input-player-name"
+              name="name"
+              data-testid="input-player-name"
+              className="input-player-name"
+              placeholder="name"
+              onChange={ this.onInputChange }
+            />
+          </label>
 
-        <label
-          htmlFor="email-input"
-        >
-          <input
-            type="email"
-            id="input-gravatar-email"
-            data-testid="input-gravatar-email"
-            className="input-email"
-            name="email"
-            placeholder="e-mail"
-            onChange={ this.onInputChange }
-          />
-        </label>
-        <button
-          disabled={ isDisabled }
-          data-testid="btn-play"
-          onClick={ this.playGame }
-        >
-          Play
-        </button>
-        <button
-          data-testid="btn-settings"
-          onClick={ this.settings }
-        >
-          Configurações
+          <label
+            htmlFor="email-input"
+          >
+            <input
+              type="email"
+              id="input-gravatar-email"
+              data-testid="input-gravatar-email"
+              className="input-email"
+              name="email"
+              placeholder="e-mail"
+              onChange={ this.onInputChange }
+            />
+          </label>
+          <button
+            disabled={ isDisabled }
+            data-testid="btn-play"
+            className="play"
+            onClick={ this.playGame }
+          >
+            Play
+          </button>
+          <button
+            data-testid="btn-settings"
+            className="setts"
+            onClick={ this.settings }
+          >
+            Configurações
 
-        </button>
-      </div>
+          </button>
+        </div>
+      </main>
     );
   }
 }

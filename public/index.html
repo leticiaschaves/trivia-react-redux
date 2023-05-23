@@ -25,9 +25,21 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Trivia React Redux</title>
+    <style>
+      .load {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 30%;
+      left: 45%;
+      color: blue;
+   }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
+    <div class="load"><i class="fa fa-cog fa-spin fa-5x fa-fw"></i><span class="sr-only">Loading...</span></div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -40,5 +52,11 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+     document.addEventListener("DOMContentLoaded", function(event) { 
+      const estilo = document.getElementsByClassName('load');
+      estilo[0].style.visibility = "hidden";
+     });
+    </script>
   </body>
 </html>
