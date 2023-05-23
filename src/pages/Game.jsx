@@ -1,20 +1,14 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import Question from '../components/Question';
+import QuestionCard from '../components/QuestionCard';
 
 export default class Game extends Component {
   render() {
     return (
       <div>
         <Header />
-        <Question />
+        <QuestionCard { ...this.props } />
       </div>
     );
   }
 }
-
-Game.propTypes = {
-  history: PropTypes.object,
-  // dispatch: PropTypes.func,
-}.isRequired;
