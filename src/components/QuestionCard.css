@@ -1,7 +1,62 @@
+.question-card-container {
+  align-items: center;
+  color: #023047;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.card {
+  align-items: center;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+  width: 60%;
+}
+
 .correct {
   border: 3px solid rgb(6, 240, 15);
 }
 
 .incorrect {
   border: 3px solid red;
+}
+
+.category {
+  font-size: 0.9rem;
+}
+
+.question {
+  font-size: 2rem;
+}
+
+.type {
+  font-size: 0.9rem;
+}
+
+.answers {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-evenly;
+  padding: 7px;
+  width: 100%;
+}
+
+.answers button {
+  background-color: lightblue;
+  border-radius: 7px;
+  color: #023047;
+  padding: 7px 0;
+  width: 100%;
+}
+
+.answers button:disabled {
+  opacity: 50%;
+}
+
+p {
+  color: white;
+  font-size: smaller;
 }

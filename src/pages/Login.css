@@ -28,6 +28,12 @@ body {
   padding: 40px;
 }
 
+.infos {
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+}
+
 h1 {
   font-size: 2.3em;
   font-style: italic;
@@ -45,33 +51,46 @@ h1 {
   width: 300px;
 }
 
-.input-email {
+.input-login {
+  border: blueviolet solid 1px;
   border-radius: 7px;
+  color: #023047;
   display: block;
   font-family: '"Inter' , sans-serif;
   height: 30px;
   margin-left: auto;
   margin-right: auto;
+  padding: 5px;
   width: 300px;
 }
 
-.play {
+.btn {
+  background-color: blueviolet;
+  border: blueviolet solid 1px;
   border-radius: 7px;
+  color: lightblue;
   display: block;
   font-family: '"Inter' , sans-serif;
   height: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 300px;
+  padding: 7px 0;
+  width: 100%;
 }
 
-.setts {
-  background-color: lightblue;
+.btn-play {
+  background-color: blueviolet;
+  border: blueviolet solid 1px;
   border-radius: 7px;
+  color: lightblue;
   display: block;
   font-family: '"Inter' , sans-serif;
   height: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 300px;
+  padding: 7px 0;
+  width: 100%;
+  background-color: #023047;
+  border: #023047 solid 1px;
+  color: lightblue;
+}
+
+.btn-play:disabled {
+  opacity: 50%;
 }
