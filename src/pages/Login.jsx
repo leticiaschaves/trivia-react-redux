@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import validator from 'validator';
 import { getToken } from '../helpers/triviaAPI';
+import { addEmail, addName } from '../redux/actions';
 
 class Login extends Component {
   state = {
@@ -27,8 +28,10 @@ class Login extends Component {
   };
 
   playGame = async () => {
-    const { history } = this.props;
-    // const { email } = this.state;
+    const { history, dispatch } = this.props;
+    const { email, name } = this.state;
+    dispatch(addEmail(email));
+    dispatch(addName(name));
     localStorage.setItem('token', await getToken());
     history.push('/game');
   };
