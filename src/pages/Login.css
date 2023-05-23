@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap') ;
+
+body {
+  color: #023047;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  align-content: center;
+  align-items: center;
+  background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.conteiner {
+  background-color: whitesmoke;
+  border-radius: 7px;
+  box-shadow: 10px 10px 40px rgba (0 , 0 , 0 , 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  padding: 40px;
+}
+
+h1 {
+  font-size: 2.3em;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+}
+
+.input-player-name {
+  border-radius: 7px;
+  display: block;
+  font-family: '"Inter' , sans-serif;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+.input-email {
+  border-radius: 7px;
+  display: block;
+  font-family: '"Inter' , sans-serif;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+.play {
+  border-radius: 7px;
+  display: block;
+  font-family: '"Inter' , sans-serif;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+.setts {
+  background-color: lightblue;
+  border-radius: 7px;
+  display: block;
+  font-family: '"Inter' , sans-serif;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
