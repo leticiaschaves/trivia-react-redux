@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap') ;
+
+.header-container {
+  align-items: center;
+  background-color: blueviolet;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-evenly;
+  padding: 2rem;
+}
+
+p {
+  color: whitesmoke;
+  font-family: '"Inter' , sans-serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 200;
+  text-align: center;
+}
