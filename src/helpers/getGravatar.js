@@ -1,11 +1,9 @@
-import md5 from 'crypto-js/md5';
+import MD5 from 'crypto-js/md5';
 import Swal from 'sweetalert2';
 
-export const getGravatar = async (email) => {
+export const getGravatar = (email) => {
   try {
-    const hash = md5(email).toString();
-    const response = await fetch(`https://www.gravatar.com/avatar/${hash}`);
-    return response.url;
+    return `https://www.gravatar.com/avatar/${MD5(email)}`;
   } catch (error) {
     Swal.fire({
       icon: 'error',

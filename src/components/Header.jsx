@@ -10,7 +10,8 @@ class Header extends Component {
 
   async componentDidMount() {
     const { gravatarEmail } = this.props;
-    const urlGravatar = await getGravatar(gravatarEmail);
+    const urlGravatar = await getGravatar(await gravatarEmail);
+    console.log(urlGravatar);
     this.setState({
       urlGravatar,
     });
@@ -20,15 +21,16 @@ class Header extends Component {
     const { name } = this.props;
     const { urlGravatar } = this.state;
     return (
-      <div>
+      <header>
         <img
           data-testid="header-profile-picture"
           src={ urlGravatar }
           alt={ name }
         />
+        <p>{ urlGravatar }</p>
         <h3 data-testid="header-player-name">{ name }</h3>
         <p data-testid="header-score">0</p>
-      </div>
+      </header>
     );
   }
 }
