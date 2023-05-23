@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import validator from 'validator';
 import { getToken } from '../helpers/triviaAPI';
 import { addEmail, addName } from '../redux/actions';
-import './Login.css'
+import './Login.css';
 
 class Login extends Component {
   state = {
