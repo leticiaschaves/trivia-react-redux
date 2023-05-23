@@ -11,7 +11,6 @@ class Header extends Component {
   componentDidMount() {
     const { gravatarEmail } = this.props;
     const urlGravatar = getGravatar(gravatarEmail);
-    console.log(urlGravatar);
     this.setState({
       urlGravatar,
     });
@@ -27,7 +26,6 @@ class Header extends Component {
           src={ urlGravatar }
           alt={ name }
         />
-        <p>{ urlGravatar }</p>
         <h3 data-testid="header-player-name">{ name }</h3>
         <p data-testid="header-score">0</p>
       </header>
