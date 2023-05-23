@@ -8,9 +8,9 @@ class Header extends Component {
     urlGravatar: '',
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const { gravatarEmail } = this.props;
-    const urlGravatar = await getGravatar(await gravatarEmail);
+    const urlGravatar = getGravatar(gravatarEmail);
     console.log(urlGravatar);
     this.setState({
       urlGravatar,
