@@ -15,6 +15,7 @@ export default class Timer extends Component {
     });
   }
 
+  // Vencido está
   decreaseTimer = () => {
     const { timer, timerHandler } = this.state;
     const { timeOut } = this.props;
