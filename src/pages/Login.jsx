@@ -57,7 +57,7 @@ class Login extends Component {
               id="input-player-name"
               name="name"
               data-testid="input-player-name"
-              className="input-player-name"
+              className="input-login"
               placeholder="name"
               onChange={ this.onInputChange }
             />
@@ -70,7 +70,7 @@ class Login extends Component {
               type="email"
               id="input-gravatar-email"
               data-testid="input-gravatar-email"
-              className="input-email"
+              className="input-login"
               name="email"
               placeholder="e-mail"
               onChange={ this.onInputChange }
@@ -78,15 +78,15 @@ class Login extends Component {
           </label>
           <button
             disabled={ isDisabled }
-            data-testid="btn-play"
-            className="play"
+            className="btn-play"
             onClick={ this.playGame }
+            id="btn-play"
           >
             Play
           </button>
           <button
             data-testid="btn-settings"
-            className="setts"
+            className="btn"
             onClick={ this.settings }
           >
             Configurações

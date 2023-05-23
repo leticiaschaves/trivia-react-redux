@@ -110,18 +110,39 @@ export default class QuestionCard extends Component {
     const { results, activeIndex } = this.state;
     const activeQuestion = results[activeIndex];
     return (
-      <div>
+      <div className="question-card-container">
         { activeQuestion
         && (
-          <>
-            <p data-testid="question-category">{activeQuestion.category}</p>
-            <p data-testid="question-text">{activeQuestion.question}</p>
-            <p>{activeQuestion.type}</p>
-            <Timer timeOut={ this.timeOut } />
-            <div data-testid="answer-options">
-              { this.renderAnswers()}
+          <main className="card">
+            <div className="infos">
+              <p
+                data-testid="question-category"
+                className="category"
+              >
+                {activeQuestion.category}
+              </p>
+              <p
+                className="type"
+              >
+                {activeQuestion.type}
+              </p>
+              <Timer timeOut={ this.timeOut } />
             </div>
-          </>
+            <div className="question-answer">
+              <p
+                data-testid="question-text"
+                className="question"
+              >
+                {activeQuestion.question}
+              </p>
+              <div
+                data-testid="answer-options"
+                className="answers"
+              >
+                { this.renderAnswers()}
+              </div>
+            </div>
+          </main>
         )}
       </div>
     );
