@@ -18,12 +18,14 @@ export default class Timer extends Component {
   // Vencido está
   decreaseTimer = () => {
     const { timer, timerHandler } = this.state;
-    const { timeOut } = this.props;
+    const { timeOut, logando } = this.props;
     if (timer === 0) {
       clearInterval(timerHandler);
       return timeOut();
     }
-    this.setState({ timer: timer - 1 });
+    const newTimer = timer - 1;
+    logando(newTimer);
+    this.setState({ timer: newTimer });
   };
 
   render() {
