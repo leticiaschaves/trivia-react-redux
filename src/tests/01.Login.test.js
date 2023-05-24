@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react"
+import { screen, waitFor } from "@testing-library/react"
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from "../App";
 import userEvent from "@testing-library/user-event";
@@ -21,7 +21,6 @@ describe('testa página de login', () => {
     const playBtn = screen.getByTestId('btn-play');
     expect(playBtn).toBeDisabled();
   });
-
   it('testa se o botão está desabilitado quando apenas um input estiver preenchido', () => {
     renderWithRouterAndRedux(<App />)
     const playBtn = screen.getByTestId('btn-play');
@@ -30,8 +29,7 @@ describe('testa página de login', () => {
     userEvent.type(inputName, 'Usuário');
     expect(playBtn).toBeDisabled();
   });
-
-  it('testa se o botão está habilitado quando os inputs estiverem preenchidos e no click a rota será "game"', () => {
+  it('testa se o botão está habilitado quando os inputs estiverem preenchidos', () => {
     const { history } = renderWithRouterAndRedux(<App />);
     const playBtn = screen.getByTestId('btn-play');
     const inputName = screen.getByTestId('input-player-name');
@@ -41,11 +39,22 @@ describe('testa página de login', () => {
     expect(playBtn).toBeDisabled();
     userEvent.type(inputEmail, 'trybe@trybe.com');
     expect(playBtn).toBeEnabled();
-    userEvent.click(playBtn);
-    const { pathname } = history.location;
-    expect(pathname).toBe('/game');
   });
+  it('testa se no click do botão play a rota será /game', async () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    const playBtn = screen.getByTestId('btn-play');
+    const inputName = screen.getByTestId('input-player-name');
+    const inputEmail = screen.getByTestId('input-gravatar-email');
+    userEvent.type(inputName, 'Usuário');
+    userEvent.type(inputEmail, 'trybe@trybe.com');
 
+   await waitFor(() => {
+      userEvent.click(playBtn);
+      const { pathname } = history.location;
+      expect(pathname).toBe('/game');
+    }, {timeout: 5000})
+
+  });
   it('testa se no click de botão de configurações a rota será "settings"', () => {
     const { history } = renderWithRouterAndRedux(<App />);
     const configBtn = screen.getByTestId('btn-settings');

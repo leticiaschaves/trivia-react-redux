@@ -4,7 +4,7 @@ import App from "../App";
 
 describe('testa o header da aplicação', () => {
   it('testa a renderização dos componentes', () => {
-    const {history } = renderWithRouterAndRedux(<App/>)
+    const { history } = renderWithRouterAndRedux(<App/>)
     act(() => {
       history.push('/game')
     })

@@ -6,14 +6,33 @@
   justify-content: center;
 }
 
+.infos {
+  border-bottom: blueviolet 1px solid;
+  border-radius: 7px;
+  justify-content: space-evenly;
+  padding: 0.1rem 3rem;
+  width: 100%;
+}
+
+p {
+  color: #023047;
+  font-size: smaller;
+}
+
+.infos p {
+  color: blueviolet;
+}
+
 .card {
   align-items: center;
+  background-color: whitesmoke;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0.5rem;
-  width: 60%;
+  max-width: 80%;
+  overflow: hidden;
+  padding: 0.1rem 1.5rem;
 }
 
 .correct {
@@ -29,7 +48,7 @@
 }
 
 .question {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .type {
@@ -45,18 +64,22 @@
 }
 
 .answers button {
-  background-color: lightblue;
+  background-color: blueviolet;
   border-radius: 7px;
-  color: #023047;
-  padding: 7px 0;
-  width: 100%;
+  color: whitesmoke;
+  cursor: pointer;
+  font-size: 11px;
+  margin: 0 0 0.5rem;
+  padding: 0.3rem 0.5rem;
+  width: 50%;
+}
+
+.answers button:hover {
+  background-color: #023047;
 }
 
 .answers button:disabled {
+  background-color: blueviolet;
   opacity: 50%;
 }
 
-p {
-  color: white;
-  font-size: smaller;
-}

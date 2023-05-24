@@ -34,6 +34,11 @@ body {
   gap: 2rem;
 }
 
+.game-name {
+  color: whitesmoke;
+  font-style: normal;
+}
+
 h1 {
   font-size: 2.3em;
   font-style: italic;
@@ -69,28 +74,38 @@ h1 {
   border: blueviolet solid 1px;
   border-radius: 7px;
   color: lightblue;
+  cursor: pointer;
   display: block;
   font-family: '"Inter' , sans-serif;
   height: 30px;
   padding: 7px 0;
   width: 100%;
+}
+
+.btn:hover {
+  background-color: lightblue;
+  color: blueviolet;
+  cursor: pointer;
 }
 
 .btn-play {
-  background-color: blueviolet;
-  border: blueviolet solid 1px;
+  background-color: #023047;
+  border: #023047 solid 1px;
   border-radius: 7px;
   color: lightblue;
+  cursor: pointer;
   display: block;
   font-family: '"Inter' , sans-serif;
   height: 30px;
   padding: 7px 0;
   width: 100%;
-  background-color: #023047;
-  border: #023047 solid 1px;
-  color: lightblue;
 }
 
 .btn-play:disabled {
+  cursor: not-allowed;
   opacity: 50%;
+}
+
+.btn-play:active {
+  background-color: blueviolet;
 }

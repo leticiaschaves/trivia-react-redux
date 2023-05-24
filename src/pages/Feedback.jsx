@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import './Feedback.css';
 
 export default class Feedback extends Component {
   initialPage = () => {
@@ -17,15 +18,18 @@ export default class Feedback extends Component {
     return (
       <div>
         <Header />
-        <main>
+        <main
+          className="feedback"
+        >
           <p data-testid="feedback-text">
             Could be better...
           </p>
           <p data-testid="feedback-text">
             Well done!
           </p>
-          <div>
+          <div className="btn-container">
             <input
+              className="btn"
               type="button"
               label="Play Again"
               value="Play Again"
@@ -33,6 +37,7 @@ export default class Feedback extends Component {
               onClick={ this.initialPage }
             />
             <input
+              className="btn"
               type="button"
               label="Ranking"
               value="Ranking"
