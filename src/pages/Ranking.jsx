@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import './Ranking.css';
 
 const decreaseOne = -1;
 
@@ -25,13 +26,16 @@ class Ranking extends Component {
   render() {
     const { rankings } = this.state;
     return (
-      <div>
+      <div className="ranking-container">
         <h1 data-testid="ranking-title">
           Ranking
         </h1>
         {
           rankings.map((ranking, index) => (
-            <div key={ index }>
+            <div
+              className="info"
+              key={ index }
+            >
               <img
                 src={ ranking.gravatarEmail }
                 alt={ ranking.name }
@@ -62,6 +66,7 @@ class Ranking extends Component {
           type="button"
           data-testid="btn-go-home"
           onClick={ this.handleClick }
+          className="go-home-btn"
         >
           Inicio
         </button>

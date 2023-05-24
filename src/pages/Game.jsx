@@ -9,7 +9,7 @@ export default class Game extends Component {
       <div className="game-container">
         <Header />
         <h1 className="game-name">
-          Nome do jogo
+          Sabe tudo!
         </h1>
         <QuestionCard { ...this.props } />
       </div>

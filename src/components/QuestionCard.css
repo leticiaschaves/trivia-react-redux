@@ -64,22 +64,46 @@ p {
 }
 
 .answers button {
-  background-color: blueviolet;
+  background-color: lightblue;
   border-radius: 7px;
-  color: whitesmoke;
+  color: #023047;
   cursor: pointer;
   font-size: 11px;
   margin: 0 0 0.5rem;
   padding: 0.3rem 0.5rem;
+  transition: all 0.3s ease-in-out;
   width: 50%;
 }
 
 .answers button:hover {
-  background-color: #023047;
+  background-color: blueviolet;
+  color: whitesmoke;
 }
 
 .answers button:disabled {
-  background-color: blueviolet;
+  background-color: lightblue;
+  color: blueviolet;
   opacity: 50%;
+}
+
+.next-btn {
+  background-color: blueviolet;
+  border-color: blueviolet;
+  border-radius: 7px;
+  color: whitesmoke;
+  cursor: pointer;
+  font-size: 11px;
+  margin: 0 0 1rem;
+  padding: 0.3rem 0.5rem;
+  transition: all 0.3s ease-in-out;
+  width: 10rem;
+}
+
+.next-btn:hover {
+  background-color: #023047;
+  border-color: #023047;
+  box-shadow: 1px 1px 200px #023047;
+  color: whitesmoke;
+  letter-spacing: 4px;
 }
 

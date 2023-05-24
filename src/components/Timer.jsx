@@ -32,7 +32,9 @@ export default class Timer extends Component {
     const { timer } = this.state;
     return (
       <div>
-        <p>{timer}</p>
+        <h1>
+          {timer}
+        </h1>
       </div>
     );
   }

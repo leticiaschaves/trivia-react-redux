@@ -47,11 +47,11 @@ class Login extends Component {
     const { isDisabled } = this.state;
     return (
       <main className="page">
-        <h1
+        {/* <h1
           className="game-name"
         >
-          Nome do jogo
-        </h1>
+          Game name
+        </h1> */}
         <div className="conteiner">
           <h1>Sign in</h1>
           <label
