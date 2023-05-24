@@ -33,7 +33,7 @@ class Feedback extends Component {
           <h3 data-testid="feedback-total-question">{ assertions }</h3>
           <div className="btn-container">
             <input
-              className="btn"
+              className="btn-feedback"
               type="button"
               label="Play Again"
               value="Play Again"
@@ -41,7 +41,7 @@ class Feedback extends Component {
               onClick={ this.initialPage }
             />
             <input
-              className="btn"
+              className="btn-feedback"
               type="button"
               label="Ranking"
               value="Ranking"

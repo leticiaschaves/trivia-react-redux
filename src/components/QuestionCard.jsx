@@ -217,12 +217,17 @@ class QuestionCard extends Component {
                 { arrayButtons }
               </div>
             </div>
+            {nextButton
+          && <input
+            type="button"
+            label="Next"
+            value="Next"
+            data-testid="btn-next"
+            className="next-btn"
+            onClick={ this.nextQuestion }
+          />}
           </main>
         )}
-        <div>
-          {nextButton
-          && <button data-testid="btn-next" onClick={ this.nextQuestion }>Next</button>}
-        </div>
       </div>
     );
   }

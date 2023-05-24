@@ -1,7 +1,6 @@
-.feedback {
+.ranking-container {
   align-items: center;
   background-color: blueviolet;
-  color: whitesmoke;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -9,27 +8,32 @@
   width: 100%;
 }
 
-.btn-container {
+.info {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 10px;
   display: flex;
   gap: 1rem;
+  padding: 0.1rem 1.5rem;
 }
 
-.btn-feedback {
+.go-home-btn {
   background-color: lightblue;
+  border: blueviolet solid 1px;
   border-radius: 7px;
   color: #023047;
   cursor: pointer;
   display: block;
-  font-family: '"Inter' , sans-serif;
-  font-size: 11px;
   height: 30px;
   padding: 7px 0;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
   width: 10rem;
 }
 
-.btn-feedback:hover {
+.go-home-btn:hover {
   background-color: #023047;
-  box-shadow: 1px 1px 200px blueviolet;
-  color: lightblue;
+  border-color: #023047;
+  box-shadow: 1px 1px 200px #023047;
+  color: whitesmoke;
+  letter-spacing: 4px;
 }
