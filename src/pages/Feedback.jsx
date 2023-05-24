@@ -16,7 +16,7 @@ class Feedback extends Component {
   };
 
   render() {
-    const { assertions } = this.props;
+    const { assertions, score } = this.props;
     const numberAssertions = 3;
     return (
       <div>
@@ -29,6 +29,8 @@ class Feedback extends Component {
               ? <p data-testid="feedback-text">Could be better...</p>
               : <p data-testid="feedback-text">Well Done!</p>
           }
+          <h3 data-testid="feedback-total-score">{ score }</h3>
+          <h3 data-testid="feedback-total-question">{ assertions }</h3>
           <div className="btn-container">
             <input
               className="btn"
@@ -55,6 +57,7 @@ class Feedback extends Component {
 
 const mapStateToProps = (globalState) => ({
   assertions: globalState.player.assertions,
+  score: globalState.player.score,
 });
 
 Feedback.propTypes = {
