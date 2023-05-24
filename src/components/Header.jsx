@@ -31,8 +31,18 @@ class Header extends Component {
           className="header-profile-img"
         />
         {/* <p>{ urlGravatar }</p> */}
-        <p data-testid="header-player-name">{ name }</p>
-        <p data-testid="header-score">0</p>
+        <p
+          data-testid="header-player-name"
+          className="name"
+        >
+          { name }
+        </p>
+        <p
+          data-testid="header-score"
+          className="score"
+        >
+          0
+        </p>
       </header>
     );
   }
