@@ -1,17 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getGravatar } from '../helpers/getGravatar';
 import { getQuestions } from '../helpers/triviaAPI';
 import { actionSaveScore } from '../redux/actions';
 import './QuestionCard.css';
 
 const ONE_SECOND_MS = 1000;
 const THIRTY_SECONDS = 30;
-const dificuldade = {
-  hard: 3,
-  medium: 2,
-  easy: 1,
-};
+const dificuldade = { hard: 3, medium: 2, easy: 1 };
 
 class QuestionCard extends Component {
   state = {
@@ -64,7 +61,6 @@ class QuestionCard extends Component {
     const { timer, results, activeIndex } = this.state;
     const { dispatch } = this.props;
     const activeQuestion = results[activeIndex];
-    // 10 + (timer * dificuldade);
     const ten = 10;
     const score = ten + (timer * dificuldade[activeQuestion.difficulty]);
     dispatch(actionSaveScore(score));
@@ -85,17 +81,31 @@ class QuestionCard extends Component {
         </button>)),
       nextButton: true,
     }));
-    // se acertou, então salva o score
-    // habilita botão next
     if (target.textContent === activeQuestion.correct_answer) {
       this.saveScore();
     }
+  };
+
+  saveRanking = () => {
+    const { nameUser, score, gravatarEmail } = this.props;
+    let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
+    const newRanking = {
+      name: nameUser,
+      picture: getGravatar(gravatarEmail),
+      score,
+    };
+    ranking.push(newRanking);
+    if (ranking.length > 1) {
+      ranking = ranking.sort((a, b) => b.score - a.score);
+    }
+    localStorage.setItem('ranking', JSON.stringify(ranking));
   };
 
   nextQuestion = () => {
     const { activeIndex, results } = this.state;
     if (activeIndex === results.length - 1) {
       const { history } = this.props;
+      this.saveRanking();
       history.push('/feedback');
     }
     const newIndex = activeIndex + 1;
@@ -225,4 +235,10 @@ QuestionCard.propTypes = {
   dispatch: PropTypes.func,
 }.isRequired;
 
-export default connect()(QuestionCard);
+const mapStateToProps = ({ player }) => ({
+  nameUser: player.name,
+  gravatarEmail: player.gravatarEmail,
+  score: player.score,
+});
+
+export default connect(mapStateToProps)(QuestionCard);
