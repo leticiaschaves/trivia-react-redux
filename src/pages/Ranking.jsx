@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+const decreaseOne = -1;
+
 class Ranking extends Component {
   state = {
     rankings: [],
@@ -50,7 +52,7 @@ class Ranking extends Component {
               return 1;
             }
             if (a.ranking.score < b.ranking.score) {
-              return -1;
+              return decreaseOne;
             }
             // a must be equal to b
             return 0;
