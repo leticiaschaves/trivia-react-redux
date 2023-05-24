@@ -7,7 +7,6 @@ const INITIAL_STATE = {
   gravatarEmail: '',
 };
 
-// o reducer user apenas recebe o email da pagina home
 function player(state = INITIAL_STATE, action) {
   switch (action.type) {
   case ADD_EMAIL:
