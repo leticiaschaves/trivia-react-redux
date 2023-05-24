@@ -1,15 +1,26 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { getQuestions } from '../helpers/triviaAPI';
+import { actionSaveScore } from '../redux/actions';
 import './QuestionCard.css';
-import Timer from './Timer';
 
-export default class QuestionCard extends Component {
+const ONE_SECOND_MS = 1000;
+const THIRTY_SECONDS = 30;
+const dificuldade = {
+  hard: 3,
+  medium: 2,
+  easy: 1,
+};
+
+class QuestionCard extends Component {
   state = {
     results: [],
     activeIndex: 0,
-    userAnswered: false,
     isDisabled: false,
+    timer: 0,
+    timerHandler: '',
+    arrayButtons: [],
   };
 
   async componentDidMount() {
@@ -19,11 +30,23 @@ export default class QuestionCard extends Component {
       this.setState({
         results: [...APIdata.results],
         activeIndex: 0,
-      });
+        timer: THIRTY_SECONDS,
+        timerHandler: setInterval(this.decreaseTimer, ONE_SECOND_MS),
+      }, this.getAnswerButtons);
     } else {
       this.logout();
     }
   }
+
+  decreaseTimer = () => {
+    const { timer, timerHandler } = this.state;
+    if (timer === 0) {
+      clearInterval(timerHandler);
+      return this.timeOut();
+    }
+    const newTimer = timer - 1;
+    this.setState({ timer: newTimer });
+  };
 
   logout = () => {
     const { history } = this.props;
@@ -36,12 +59,45 @@ export default class QuestionCard extends Component {
     return array.sort(() => half - Math.random());
   };
 
-  handleClick = () => {
-    this.setState({ userAnswered: true });
+  saveScore = () => {
+    const { timer, results, activeIndex } = this.state;
+    const { dispatch } = this.props;
+    const activeQuestion = results[activeIndex];
+    // 10 + (timer * dificuldade);
+    const ten = 10;
+    const score = ten + (timer * dificuldade[activeQuestion.difficulty]);
+    // console.log('SCORE', score);
+    dispatch(actionSaveScore(score));
   };
 
-  renderAnswers = () => {
-    const { results, activeIndex, userAnswered, isDisabled } = this.state;
+  handleClick = ({ target }) => {
+    // console.log('handleClick');
+    const { timerHandler, results, activeIndex } = this.state;
+    const activeQuestion = results[activeIndex];
+    clearInterval(timerHandler);
+    // console.log('TEXT CONTENT', target.textContent);
+    this.setState((prevState) => ({
+      arrayButtons: prevState.arrayButtons.map((elm) => {
+        console.log(elm);
+        return (
+          <button
+            key={ elm.key }
+            data-testid={ elm.props['data-testid'] }
+            className={ elm.key === 'correct' ? 'correct' : 'incorrect' }
+          >
+            {elm.props.children}
+          </button>);
+      }),
+    }));
+    // se acertou, então salva o score
+    // habilita botão next
+    if (target.textContent === activeQuestion.correct_answer) {
+      this.saveScore();
+    }
+  };
+
+  getAnswerButtons = () => {
+    const { results, activeIndex, isDisabled } = this.state;
     const activeQuestion = results[activeIndex];
     const arrayButtons = [];
 
@@ -50,7 +106,6 @@ export default class QuestionCard extends Component {
         <button
           key="correct"
           data-testid="correct-answer"
-          className={ userAnswered ? 'correct' : '' }
           onClick={ this.handleClick }
           disabled={ isDisabled }
         >
@@ -62,52 +117,61 @@ export default class QuestionCard extends Component {
         <button
           key="incorrect"
           data-testid={ `wrong-answer-${0}` }
-          className={ userAnswered ? 'incorrect' : '' }
           onClick={ this.handleClick }
           disabled={ isDisabled }
         >
           {activeQuestion.incorrect_answers[0]}
         </button>,
       );
-
-      return (this.sortArray(arrayButtons));
-    }
-    arrayButtons.push(
-      <button
-        key="correct"
-        data-testid="correct-answer"
-        className={ userAnswered ? 'correct' : '' }
-        onClick={ this.handleClick }
-        disabled={ isDisabled }
-      >
-        {activeQuestion.correct_answer}
-      </button>,
-    );
-
-    activeQuestion.incorrect_answers.forEach((question, index) => {
+    } else {
       arrayButtons.push(
         <button
-          key={ index }
-          data-testid={ `wrong-answer-${index}` }
-          className={ userAnswered ? 'incorrect' : '' }
+          key="correct"
+          data-testid="correct-answer"
           onClick={ this.handleClick }
           disabled={ isDisabled }
         >
-          {activeQuestion.incorrect_answers[index]}
+          {activeQuestion.correct_answer}
         </button>,
       );
-    });
-    console.log(this.sortArray(arrayButtons));
-    return this.sortArray(arrayButtons);
+
+      activeQuestion.incorrect_answers.forEach((question, index) => {
+        arrayButtons.push(
+          <button
+            key={ index }
+            data-testid={ `wrong-answer-${index}` }
+            onClick={ this.handleClick }
+            disabled={ isDisabled }
+          >
+            {activeQuestion.incorrect_answers[index]}
+          </button>,
+        );
+      });
+    }
+
+    this.setState({ arrayButtons: this.sortArray(arrayButtons) });
   };
 
   timeOut = () => {
     console.log('GAME OVER');
-    this.setState({ isDisabled: true });
+    this.setState((prevState) => ({
+      arrayButtons: prevState.arrayButtons.map((elm) => {
+        console.log(elm);
+        return (
+          <button
+            key={ elm.key }
+            data-testid={ elm.props['data-testid'] }
+            className={ elm.key === 'correct' ? 'correct' : 'incorrect' }
+            disabled
+          >
+            {elm.props.children}
+          </button>);
+      }),
+    }));
   };
 
   render() {
-    const { results, activeIndex } = this.state;
+    const { results, activeIndex, timer, arrayButtons } = this.state;
     const activeQuestion = results[activeIndex];
     return (
       <div className="question-card-container">
@@ -126,7 +190,7 @@ export default class QuestionCard extends Component {
               >
                 {activeQuestion.type}
               </p>
-              <Timer timeOut={ this.timeOut } />
+              <p>{timer}</p>
             </div>
             <div className="question-answer">
               <p
@@ -139,7 +203,7 @@ export default class QuestionCard extends Component {
                 data-testid="answer-options"
                 className="answers"
               >
-                { this.renderAnswers()}
+                { arrayButtons }
               </div>
             </div>
           </main>
@@ -153,4 +217,7 @@ QuestionCard.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
+  dispatch: PropTypes.func,
 }.isRequired;
+
+export default connect()(QuestionCard);

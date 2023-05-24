@@ -77,8 +77,8 @@ h1 {
 }
 
 .btn-play {
-  background-color: blueviolet;
-  border: blueviolet solid 1px;
+  background-color: #023047;
+  border: #023047 solid 1px;
   border-radius: 7px;
   color: lightblue;
   display: block;
@@ -86,9 +86,6 @@ h1 {
   height: 30px;
   padding: 7px 0;
   width: 100%;
-  background-color: #023047;
-  border: #023047 solid 1px;
-  color: lightblue;
 }
 
 .btn-play:disabled {

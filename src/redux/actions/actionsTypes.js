@@ -1,4 +1,5 @@
 const ADD_EMAIL = 'ADD_EMAIL';
 const ADD_NAME = 'ADD_NAME';
+const SAVE_SCORE = 'SAVE_SCORE';
 
-export { ADD_EMAIL, ADD_NAME };
+export { ADD_EMAIL, ADD_NAME, SAVE_SCORE };
