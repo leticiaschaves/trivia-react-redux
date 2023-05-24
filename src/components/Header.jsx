@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { getGravatar } from '../helpers/getGravatar';
 import './Header.css';
 
@@ -18,7 +18,7 @@ class Header extends Component {
   }
 
   render() {
-    const { name } = this.props;
+    const { name, score } = this.props;
     const { urlGravatar } = this.state;
     return (
       <header
@@ -41,7 +41,7 @@ class Header extends Component {
           data-testid="header-score"
           className="score"
         >
-          0
+          { score }
         </p>
       </header>
     );
@@ -50,12 +50,14 @@ class Header extends Component {
 
 const mapStateToProps = (globalState) => ({
   name: globalState.player.name,
+  score: globalState.player.score,
   gravatarEmail: globalState.player.gravatarEmail,
 });
 
 Header.propTypes = {
   gravatarEmail: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Header);
