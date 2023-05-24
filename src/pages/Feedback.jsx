@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import './Feedback.css';
 
-export default class Feedback extends Component {
+class Feedback extends Component {
   initialPage = () => {
     const { history } = this.props;
     history.push('/');
@@ -15,18 +16,19 @@ export default class Feedback extends Component {
   };
 
   render() {
+    const { assertions } = this.props;
+    const numberAssertions = 3;
     return (
       <div>
         <Header />
         <main
           className="feedback"
         >
-          <p data-testid="feedback-text">
-            Could be better...
-          </p>
-          <p data-testid="feedback-text">
-            Well done!
-          </p>
+          {
+            (assertions < numberAssertions)
+              ? <p data-testid="feedback-text">Could be better...</p>
+              : <p data-testid="feedback-text">Well Done!</p>
+          }
           <div className="btn-container">
             <input
               className="btn"
@@ -51,6 +53,12 @@ export default class Feedback extends Component {
   }
 }
 
+const mapStateToProps = (globalState) => ({
+  assertions: globalState.player.assertions,
+});
+
 Feedback.propTypes = {
   history: PropTypes.object,
 }.isRequired;
+
+export default connect(mapStateToProps)(Feedback);
