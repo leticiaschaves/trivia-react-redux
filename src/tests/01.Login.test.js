@@ -48,7 +48,7 @@ describe('testa página de login', () => {
     userEvent.type(inputName, 'Usuário');
     userEvent.type(inputEmail, 'trybe@trybe.com');
 
-   await waitFor(() => {
+    await waitFor(() => {
       userEvent.click(playBtn);
       const { pathname } = history.location;
       expect(pathname).toBe('/game');

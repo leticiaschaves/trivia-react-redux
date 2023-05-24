@@ -9,7 +9,7 @@ class Ranking extends Component {
 
   componentDidMount() {
     // buscar o array do localStorage
-    const ranking = localStorage.getItem('ranking');
+    const ranking = JSON.parse(localStorage.getItem('ranking')) || [];
     this.setState({
       rankings: ranking,
     });
@@ -29,27 +29,32 @@ class Ranking extends Component {
         </h1>
         {
           rankings.map((ranking, index) => (
-            <>
+            <div key={ index }>
               <img
-                data-testid="header-profile-picture"
                 src={ ranking.gravatarEmail }
                 alt={ ranking.name }
               />
               <p
-                key={ index }
-                data-testid="header-player-name"
+                data-testid={ `player-name-${index}` }
               >
                 {ranking.name}
-                oi
               </p>
               <p
-                key={ index }
-                data-testid="header-score"
+                data-testid={ `player-score-${index}` }
               >
                 {ranking.score}
               </p>
-            </>
-          ))
+            </div>
+          )).sort((a, b) => {
+            if (a.ranking.score > b.ranking.score) {
+              return 1;
+            }
+            if (a.ranking.score < b.ranking.score) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          })
         }
         <button
           type="button"
