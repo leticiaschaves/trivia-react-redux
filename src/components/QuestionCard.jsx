@@ -21,6 +21,7 @@ class QuestionCard extends Component {
     timer: 0,
     timerHandler: '',
     arrayButtons: [],
+    nextButton: false,
   };
 
   async componentDidMount() {
@@ -77,23 +78,35 @@ class QuestionCard extends Component {
     clearInterval(timerHandler);
     // console.log('TEXT CONTENT', target.textContent);
     this.setState((prevState) => ({
-      arrayButtons: prevState.arrayButtons.map((elm) => {
-        console.log(elm);
-        return (
-          <button
-            key={ elm.key }
-            data-testid={ elm.props['data-testid'] }
-            className={ elm.key === 'correct' ? 'correct' : 'incorrect' }
-          >
-            {elm.props.children}
-          </button>);
-      }),
+      arrayButtons: prevState.arrayButtons.map((elm) => (
+        <button
+          key={ elm.key }
+          data-testid={ elm.props['data-testid'] }
+          className={ elm.key === 'correct' ? 'correct' : 'incorrect' }
+        >
+          {elm.props.children}
+        </button>)),
+      nextButton: true,
     }));
     // se acertou, então salva o score
     // habilita botão next
     if (target.textContent === activeQuestion.correct_answer) {
       this.saveScore();
     }
+  };
+
+  nextQuestion = () => {
+    const { activeIndex, results } = this.state;
+    if (activeIndex === results.length - 1) {
+      const { history } = this.props;
+      history.push('/feedback');
+    }
+    const newIndex = activeIndex + 1;
+    this.setState({
+      activeIndex: newIndex,
+      timer: THIRTY_SECONDS,
+      timerHandler: setInterval(this.decreaseTimer, ONE_SECOND_MS),
+    }, this.getAnswerButtons);
   };
 
   getAnswerButtons = () => {
@@ -153,25 +166,22 @@ class QuestionCard extends Component {
   };
 
   timeOut = () => {
-    console.log('GAME OVER');
+    // console.log('GAME OVER');
     this.setState((prevState) => ({
-      arrayButtons: prevState.arrayButtons.map((elm) => {
-        console.log(elm);
-        return (
-          <button
-            key={ elm.key }
-            data-testid={ elm.props['data-testid'] }
-            className={ elm.key === 'correct' ? 'correct' : 'incorrect' }
-            disabled
-          >
-            {elm.props.children}
-          </button>);
-      }),
+      arrayButtons: prevState.arrayButtons.map((elm) => (
+        <button
+          key={ elm.key }
+          data-testid={ elm.props['data-testid'] }
+          className={ elm.key === 'correct' ? 'correct' : 'incorrect' }
+          disabled
+        >
+          {elm.props.children}
+        </button>)),
     }));
   };
 
   render() {
-    const { results, activeIndex, timer, arrayButtons } = this.state;
+    const { results, activeIndex, timer, arrayButtons, nextButton } = this.state;
     const activeQuestion = results[activeIndex];
     return (
       <div className="question-card-container">
@@ -184,11 +194,6 @@ class QuestionCard extends Component {
                 className="category"
               >
                 {activeQuestion.category}
-              </p>
-              <p
-                className="type"
-              >
-                {activeQuestion.type}
               </p>
               <p>{timer}</p>
             </div>
@@ -208,6 +213,10 @@ class QuestionCard extends Component {
             </div>
           </main>
         )}
+        <div>
+          {nextButton
+          && <button data-testid="btn-next" onClick={ this.nextQuestion }>Next</button>}
+        </div>
       </div>
     );
   }
