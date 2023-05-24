@@ -67,16 +67,13 @@ class QuestionCard extends Component {
     // 10 + (timer * dificuldade);
     const ten = 10;
     const score = ten + (timer * dificuldade[activeQuestion.difficulty]);
-    // console.log('SCORE', score);
     dispatch(actionSaveScore(score));
   };
 
   handleClick = ({ target }) => {
-    // console.log('handleClick');
     const { timerHandler, results, activeIndex } = this.state;
     const activeQuestion = results[activeIndex];
     clearInterval(timerHandler);
-    // console.log('TEXT CONTENT', target.textContent);
     this.setState((prevState) => ({
       arrayButtons: prevState.arrayButtons.map((elm) => (
         <button
@@ -166,7 +163,6 @@ class QuestionCard extends Component {
   };
 
   timeOut = () => {
-    // console.log('GAME OVER');
     this.setState((prevState) => ({
       arrayButtons: prevState.arrayButtons.map((elm) => (
         <button
