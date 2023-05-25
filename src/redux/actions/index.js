@@ -1,4 +1,4 @@
-import { ADD_EMAIL, ADD_NAME, SAVE_SCORE } from './actionsTypes';
+import { ADD_EMAIL, ADD_NAME, RESET_SCORE, SAVE_SCORE } from './actionsTypes';
 
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -13,4 +13,8 @@ export const addName = (name) => ({
 export const actionSaveScore = (score) => ({
   type: SAVE_SCORE,
   payload: score,
+});
+
+export const resetScore = () => ({
+  type: RESET_SCORE,
 });
