@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { resetScore } from '../redux/actions';
 import './Ranking.css';
 
 const decreaseOne = -1;
@@ -19,7 +20,8 @@ class Ranking extends Component {
   }
 
   handleClick = () => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    dispatch(resetScore());
     history.push('/');
   };
 
@@ -52,10 +54,10 @@ class Ranking extends Component {
               </p>
             </div>
           )).sort((a, b) => {
-            if (a.ranking.score > b.ranking.score) {
+            if (a.score > b.score) {
               return 1;
             }
-            if (a.ranking.score < b.ranking.score) {
+            if (a.score < b.score) {
               return decreaseOne;
             }
             // a must be equal to b

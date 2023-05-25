@@ -2,11 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import { resetScore } from '../redux/actions';
 import './Feedback.css';
 
 class Feedback extends Component {
   initialPage = () => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    dispatch(resetScore());
     history.push('/');
   };
 
